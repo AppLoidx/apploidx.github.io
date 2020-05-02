@@ -1,0 +1,84 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Arthur Kupriyanov</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet"
+          href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+          integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <!--    FONTS-->
+    <link rel="stylesheet" href="https://use.typekit.net/lgx1teu.css">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&family=Press+Start+2P&display=swap"
+          rel="stylesheet">
+    <!--    END FONTS-->
+    <style>
+        body {
+            font-family: 'M PLUS Rounded 1c', "Helvetica Neue", Arial, sans-serif;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+<main class="page blog-post container my-5">
+    <section class="clean-block clean-post dark my-5 p-5">
+        <div class="container card">
+            <div class="card-header">
+                <h3 style="font-family: 'Press Start 2P', Arial, sans-serif">Ошибка в <span class="text-success">Spring Boot </span>с
+                    логами</h3>
+            </div>
+            <div class="block-content card-body">
+
+                <div class="post-body">
+
+                    <div class="post-info"><span>02/05/2020</span></div>
+                    <p><br>Забавная хрень с Spring Boot
+                        <br><br>
+                        В общем, сидел, писал, писал и в какой-то момент приложение на Spring Boot перестало
+                        запускаться. Никаких ошибок или чего-либо еще.
+                        <br>
+                        Вместо этого просто эта надпись:
+                        Process finished with exit code 0
+                        <br><br>
+                        Я стал разбираться, менять версии, добавлять web-starter. Эффекта никакого. Подумал, что это
+                        IDEA халтурит. Скомпилировал все вручную через командную строку. Тоже самое.
+                        <br><br>
+                        Но так как приложение было запущено в проде, то я уже знал, что на хабе лежит рабочая версия.
+                        Решил откатить. И вот я увидел надпись, которую я уже полчаса не мог получить : Spring в ASCII
+                        арте. Все классно, все работает.
+                        <br><br>
+                        Чтобы узнать причину, я решил сделать компаринг. И то, что я увидел - это конечно кек.
+                        <br><br>
+                        Приложение начало падать, когда я случайно добавил спейс в одном из переменных application
+                        properties.
+                        <br>
+                        Эта была запись формата логов :
+                    <pre>
+                    <code>...{faint} %clr(%5p) %clr(${PID})...</code>, я случайно заменил на
+                    <code>...{faint} %clr(% 5p) %clr(${PID})...</code>
+                </pre>
+                    И все, этого было достаточно, чтобы приложение упало без единого сообщения об ошибке.
+                    <br><br>
+                    Я конечно понимаю, что произошла ошибка во время инициализации логгера, но тем не менее, странно,
+                    что приложение не вывело хотя бы в стандартный поток ошибок
+                    <br><br>
+                    <p><a href="/">На главную</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+        integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
